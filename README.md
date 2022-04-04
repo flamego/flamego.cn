@@ -2,7 +2,7 @@
 
 [![Better Uptime Badge](https://betteruptime.com/status-badges/v1/monitor/dg05.svg)](https://betteruptime.com/?utm_source=status_badge)
 
-本仓库为中文文档站点 https://flamego.cn 的源码，站点使用 [VuePress](https://v2.vuepress.vuejs.org/) 作为生成器，并实时同步到 [CODING](https://coding.net/) 仓库以通过 Webhook 触发[云开发 Webify](https://webify.cloudbase.net/) 进行部署。
+本仓库为中文文档站点 https://flamego.cn 的源码，站点使用 [VuePress](https://v2.vuepress.vuejs.org/) 作为生成器，并基于 [GitHub Actions](.github/workflows/sync.yml) 实时同步到 [CODING](https://coding.net/) 仓库以通过 Webhook 触发[云开发 Webify](https://webify.cloudbase.net/) 进行部署。
 
 运行以下命令启动本地预览实例：
 
