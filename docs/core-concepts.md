@@ -251,6 +251,53 @@ Return an error
 :::
 ::::
 
+### 返回内容和潜在错误
+
+也可以根据实际情况返回内容或者错误消息：
+
+:::: code-group
+::: code-group-item 代码
+```go:no-line-numbers
+package main
+
+import (
+	"errors"
+	"net/http"
+
+	"github.com/flamego/flamego"
+)
+
+func main() {
+	f := flamego.New()
+	f.Get("/string", func() (string, error) {
+		return "Return a string", nil
+	})
+	f.Get("/bytes", func() ([]byte, error) {
+		return []byte("Return some bytes"), nil
+	})
+	f.Run()
+}
+```
+:::
+::: code-group-item 测试
+```:no-line-numbers
+$ curl -i http://localhost:2830/string
+HTTP/1.1 200 OK
+...
+
+Return a string
+
+$ curl -i http://localhost:2830/bytes
+HTTP/1.1 200 OK
+...
+
+Return some bytes
+```
+:::
+::::
+
+当处理器返回不为 `nil` 的错误时，客户端只会接收到错误消息。
+
 ![How cool is that?](https://media0.giphy.com/media/hS4Dz87diTpnDXf98E/giphy.gif?cid=ecf05e47go1oiqgxj1ro7e3t1usexogh109gigssvhxlp93a&rid=giphy.gif&ct=g)
 
 ## 服务注入
