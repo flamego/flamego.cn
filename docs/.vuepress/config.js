@@ -50,6 +50,10 @@ module.exports = {
                         text: "常见问题",
                         link: "/faqs.html",
                     },
+                    {
+                        text: "视频教程",
+                        link: "https://github.com/unknwon/flamego-basics",
+                    },
                 ],
 
                 // page meta
