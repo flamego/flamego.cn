@@ -80,7 +80,7 @@ module.exports = {
 
         // a11y
         openInNewWindow: "在新窗口打开",
-        toggleDarkMode: "切换夜间模式",
+        toggleDarkMode: "切换深色模式",
         toggleSidebar: "切换侧边栏",
         logo: "/favicon.png",
         repo: "flamego/flamego",
