@@ -51,3 +51,4 @@ func main() {
 - 请通过[提交工单](https://github.com/flamego/flamego/issues)或[发起讨论](https://github.com/flamego/flamego/discussions)向我们提供反馈
 - 关注 [Twitter](https://twitter.com/flamego_dev) 官方账号以获取最新动态
 - 还可以在 GitHub 上找到我们的[品牌套件](https://github.com/flamego/brand-kit)
+- 加入 QQ 群 910083715 参与社区交流
