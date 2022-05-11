@@ -15,7 +15,7 @@ next:
 
 每个处理器在运行时被调用都会获得一个类型为 [`flamego.Context`](https://pkg.go.dev/github.com/flamego/flamego#Context) 的请求上下文。除了一些如缓存、数据库连接等有状态的资源之外，每个请求上下文之间的数据和状态并不隐性共享。
 
-因为，`flamego.Context` 可以在你的处理器中被直接使用：
+因此，`flamego.Context` 可以在你的处理器中被直接使用：
 
 ```go:no-line-numbers
 func main() {
