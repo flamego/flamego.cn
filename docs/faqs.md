@@ -62,7 +62,7 @@ func main() {
 
 ## 如何提供文件下载？
 
-```go
+```go:no-line-numbers
 import (
 	"net/http"
 	"net/url"
