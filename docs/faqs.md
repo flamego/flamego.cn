@@ -60,6 +60,15 @@ func main() {
 }
 ```
 
+## 如何提供文件下载？
+
+```go
+f.Get("/download", func(w http.ResponseWriter, r *http.Request) {
+	// ...
+	http.ServeFile(w, r, "文件路径")
+})
+```
+
 ## 如何集成到现有的 Web 应用？
 
 因为 Flame 实例实现了 [`http.Handler`](https://pkg.go.dev/net/http#Handler) 接口，所以可以被集成到任何接受 `http.Handler` 作为参数的地方。
