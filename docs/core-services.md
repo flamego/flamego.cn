@@ -190,6 +190,8 @@ Flame 实例的请求上下文提供了一系列相关的辅助方法，包括�
 - `QueryInt64` 返回解析为 `int64` 类型的值
 - `QueryFloat64` 返回解析为 `float64` 类型的值
 
+以上方法均接受一个可选参数作为所获取的 URL 参数不存在时的默认值。
+
 ::: tip
 如果现有的辅助方法不能满足应用需求，你还可以通过直接操作底层的 [`url.Values`](https://pkg.go.dev/net/url#Values) 来获取：
 
