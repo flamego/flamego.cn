@@ -37,6 +37,10 @@ f.Any("/", ...)
 
 ```go:no-line-numbers
 f.Routes("/", "GET,POST", ...)
+
+// 或者
+
+f.Routes("/", http.MethodGet, http.MethodPost, ...)
 ```
 
 ## 术语
