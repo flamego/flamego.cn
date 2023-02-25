@@ -13,7 +13,7 @@ Flamego 是一款简洁的、极易扩展且模块化的 Go Web 框架。
 
 ## 下载安装
 
-Go 语言的最低版本要求为 **1.18**。
+Go 语言的最低版本要求为 **1.19**。
 
 ```:no-line-numbers
 go get github.com/flamego/flamego
