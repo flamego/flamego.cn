@@ -224,7 +224,7 @@ f.Get(..., func(r *http.Request) {
 
 ## 默认日志器
 
-由 [Charm](https://charm.sh/) 团队开源的 [`log.Logger`](https://pkg.go.dev/github.com/charmbracelet/log#Logger) 可以作为所有中间件和处理器的通用结构化日志器（Structured Logging）使用：
+由 [Charm](https://charm.sh/) 团队开源的 [`*log.Logger`](https://pkg.go.dev/github.com/charmbracelet/log#Logger) 可以作为所有中间件和处理器的通用结构化日志器（Structured Logging）使用：
 
 ```go:no-line-numbers
 package main
@@ -236,7 +236,7 @@ import (
 
 func main() {
 	f := flamego.New()
-	f.Get("/", func(r *http.Request, logger log.Logger) {
+	f.Get("/", func(r *http.Request, logger *log.Logger) {
 		logger.Info("Hello, Flamego!", "path", r.RequestURI)
 	})
 	f.Run()
@@ -247,7 +247,7 @@ func main() {
 
 ```:no-line-numbers
 2023-03-06 20:57:38 🧙 Flamego: Listening on 0.0.0.0:2830 env=development
-2023-03-06 20:57:51 INFO 🧙 Flamego: Hello, Flamego! path=/
+2023-03-06 20:57:51 INFO Hello, Flamego! path=/
 ```
 
 [路由日志](#路由日志)就是使用了这个核心服务实现[响应时间和状态码的打印](https://github.com/flamego/flamego/blob/1150b7b988c4287840068703c11c892f900d60f1/logger.go#L42-L47)。
@@ -334,8 +334,8 @@ func main() {
 
 ```:no-line-numbers
 2023-03-06 20:59:58 🧙 Flamego: Listening on 0.0.0.0:2830 env=development
-2023-03-06 21:00:01 🧙 Flamego: Started method=GET path=/ remote=127.0.0.1
-2023-03-06 21:00:01 🧙 Flamego: Completed method=GET path=/ status=0 duration="564.792µs"
+2023-03-06 21:00:01 Logger: Started method=GET path=/ remote=127.0.0.1
+2023-03-06 21:00:01 Logger: Completed method=GET path=/ status=0 duration="564.792µs"
 ```
 
 ## Panic 恢复
