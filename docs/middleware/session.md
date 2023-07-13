@@ -303,6 +303,54 @@ func main() {
 }
 ```
 
+### SQLite
+
+[`sqlite.Initer`](https://pkg.go.dev/github.com/flamego/session/sqlite#Initer) 是 SQLite 存储后端的初始化函数，并可以配合 [`sqlite.Config`](https://pkg.go.dev/github.com/flamego/session/sqlite#Config) 对其进行配置：
+
+```go:no-line-numbers{16-23}
+package main
+
+import (
+	"os"
+	"strconv"
+
+	"github.com/flamego/flamego"
+	"github.com/flamego/session"
+	"github.com/flamego/session/sqlite"
+)
+
+func main() {
+	f := flamego.Classic()
+
+	f.Use(session.Sessioner(
+		session.Options{
+			Initer: sqlite.Initer(),
+			Config: sqlite.Config{
+				DSN:       "app.db",
+				Table:     "sessions",
+				InitTable: true,
+			},
+		},
+	))
+	f.Get("/set", func(s session.Session) string {
+		s.Set("user_id", 123)
+		return "Succeed"
+	})
+	f.Get("/get", func(s session.Session) string {
+		userID, ok := s.Get("user_id").(int)
+		if !ok || userID <= 0 {
+			return "Not authenticated"
+		}
+		return "Authenticated as " + strconv.Itoa(userID)
+	})
+	f.Get("/clear", func(s session.Session) string {
+		s.Delete("user_id")
+		return "Cleared"
+	})
+	f.Run()
+}
+```
+
 ## 闪现消息
 
 session 中间件提供了闪现消息的机制，闪现消息指的是在下次会话展现给用户的消息，并且只会展现一次。
