@@ -305,6 +305,55 @@ func main() {
 }
 ```
 
+### SQLite
+
+[`sqlite.Initer`](https://pkg.go.dev/github.com/flamego/cache/sqlite#Initer) 是 SQLite 存储后端的初始化函数，并可以配合 [`sqlite.Config`](https://pkg.go.dev/github.com/flamego/cache/sqlite#Config) 对其进行配置：
+
+```go:no-line-numbers{17-24}
+package main
+
+import (
+	"net/http"
+	"os"
+	"time"
+
+	"github.com/flamego/cache"
+	"github.com/flamego/cache/sqlite"
+	"github.com/flamego/flamego"
+)
+
+func main() {
+	f := flamego.Classic()
+
+	f.Use(cache.Cacher(
+		cache.Options{
+			Initer: sqlite.Initer(),
+			Config: sqlite.Config{
+				DSN:       "app.db",
+				Table:     "cache",
+				InitTable: true,
+			},
+		},
+	))
+	f.Get("/set", func(r *http.Request, cache cache.Cache) error {
+		return cache.Set(r.Context(), "cooldown", true, time.Minute)
+	})
+	f.Get("/get", func(r *http.Request, cache cache.Cache) string {
+		v, err := cache.Get(r.Context(), "cooldown")
+		if err != nil && err != os.ErrNotExist {
+			return err.Error()
+		}
+
+		cooldown, ok := v.(bool)
+		if !ok || !cooldown {
+			return "It has been cooled"
+		}
+		return "Still hot"
+	})
+	f.Run()
+}
+```
+
 ## 存储类型支持
 
 缓存数据的默认编解码格式为 [gob](https://pkg.go.dev/encoding/gob)，因此仅支持有限的值类型。如果遇到类似 `encode: gob: type not registered for interface: time.Duration` 这样的错误，则可以通过 [`gob.Register`](https://pkg.go.dev/encoding/gob#Register) 在应用中将该类型注册到编解码器中解决：
