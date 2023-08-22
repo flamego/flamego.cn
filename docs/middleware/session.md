@@ -6,13 +6,11 @@ prev:
 
 # session
 
-session 中间件为 [Flame 实例](../core-concepts.md#实例)提供用户会话管理服务，支持的存储后端包括内存、文件系统、PostgreSQL、MySQL、Redis 和 MongoDB。
+session 中间件为 [Flame 实例](../core-concepts.md#实例)提供用户会话管理服务，支持的存储后端包括内存、文件系统、PostgreSQL、MySQL、Redis、MongoDB 和 SQLite。
 
 你可以在 [GitHub](https://github.com/flamego/session) 上阅读该中间件的源码或通过 [pkg.go.dev](https://pkg.go.dev/github.com/flamego/session?tab=doc) 查看 API 文档。
 
 ## 下载安装
-
-Go 语言的最低版本要求为 **1.16**。
 
 ```:no-line-numbers
 go get github.com/flamego/session

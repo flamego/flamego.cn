@@ -12,8 +12,6 @@ captcha 中间件为 [Flame 实例](../core-concepts.md#实例)提供验证码�
 
 ## 下载安装
 
-Go 语言的最低版本要求为 **1.16**。
-
 ```:no-line-numbers
 go get github.com/flamego/captcha
 ```
