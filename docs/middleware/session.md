@@ -431,3 +431,13 @@ func main() {
 ```
 
 上例展示了如何在不同的路由中使用不同类型的闪现消息（`string` and `Flash`）。
+
+## 存储类型支持
+
+缓存数据的默认编解码格式为 [gob](https://pkg.go.dev/encoding/gob)，因此仅支持有限的值类型。如果遇到类似 `encode: gob: type not registered for interface: time.Duration` 这样的错误，则可以通过 [`gob.Register`](https://pkg.go.dev/encoding/gob#Register) 在应用中将该类型注册到编解码器中解决：
+
+```go:no-line-numbers
+gob.Register(time.Duration(0))
+```
+
+单个应用中对同一类型仅需注册一次。
