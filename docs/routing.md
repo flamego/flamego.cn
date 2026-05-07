@@ -177,7 +177,7 @@ Welcome to Boston, MA!
 尝试执行 `curl http://localhost:2830/posts/2021-11-abc.html` 并观察输出的变化。
 :::
 
-::: tip
+::: tip 🆕 v1.9.10 版本新增
 捕获到的绑定参数也会通过 [`(*http.Request).SetPathValue`](https://pkg.go.dev/net/http#Request.SetPathValue) 写入请求对象，因此 `r.PathValue("name")` 会返回与 `c.Param("name")` 相同的值。
 :::
 
