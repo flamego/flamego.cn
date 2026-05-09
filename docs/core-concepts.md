@@ -73,9 +73,10 @@ func main() {
 [`flamego.Hander`](https://pkg.go.dev/github.com/flamego/flamego#Handler) 是 Flamego 中处理器的类型容器，如果你打开源码便能发现其本质上就是一个空接口（`interface{}`）：
 
 ```go:no-line-numbers
-// Handler is any callable function. Flamego attempts to inject services into
-// the Handler's argument list and panics if any argument could not be fulfilled
-// via dependency injection.
+// Handler is any callable function or a value that implements http.Handler.
+// Flamego attempts to inject services into the Handler's argument list and
+// panics if any argument could not be fulfilled via dependency injection.
+// Values implementing http.Handler are invoked via their ServeHTTP method.
 type Handler interface{}
 ```
 
@@ -127,6 +128,14 @@ Respond from a method of a type
 ```
 :::
 ::::
+
+::: tip 🆕 v1.9.11 版本新增
+任何实现了 [`http.Handler`](https://pkg.go.dev/net/http#Handler) 接口的值也都是有效的 `flamego.Handler`，因此你可以直接将标准库或第三方的 `http.Handler` 实现接入路由：
+
+```go:no-line-numbers
+f.Get("/files/*", http.StripPrefix("/files/", http.FileServer(http.Dir("./public"))))
+```
+:::
 
 ## 返回值
 
