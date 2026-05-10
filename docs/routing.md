@@ -484,6 +484,31 @@ f.Get("/", ...).Headers(
 
 当某个路由在请求头匹配环节失败时，Flame 实例会继续尝试匹配其它路由而不会中断匹配流程。
 
+## 匹配自定义断言
+
+::: tip 🆕 v1.11.0 版本新增
+:::
+
+当请求路径和 `Headers` 的匹配规则还不足以满足需求时，你可以通过 `Match` 方法为路由附加任意的断言函数：
+
+```go:no-line-numbers
+f.Get("/admin", ...).Match(func(r *http.Request) bool {
+	return strings.HasPrefix(r.RemoteAddr, "10.")
+})
+```
+
+`Match` 方法接受一个 `func(*http.Request) bool` 类型的函数。该断言只有在请求路径（以及 `Headers` 匹配器，如果有）都匹配成功后才会被求值。如果断言返回 false，请求会像 `Headers` 匹配失败那样继续尝试下一个候选路由，而不会中断匹配流程。
+
+在同一个路由上多次调用 `Match` 会累积断言，并以 AND 的方式组合：所有断言均须返回 true 时路由才会匹配。当与 `Headers` 组合使用时，两者都必须匹配成功：
+
+```go:no-line-numbers
+f.Get("/", ...).
+	Headers("Accept", "application/json").
+	Match(func(r *http.Request) bool { return r.TLS != nil })
+```
+
+断言不会影响路由的匹配优先级，也不会参与 `URLPath` 的构建。向 `Match` 传入 nil 函数会在注册时触发 panic。
+
 ## 匹配优先级
 
 随着 Web 应用的复杂化，配置的路由也会越来越多，此时对于路由之间匹配优先级的理解就显得至关重要。
