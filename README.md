@@ -1,6 +1,7 @@
 # flamego.cn
 
-[![Better Uptime Badge](https://betteruptime.com/status-badges/v1/monitor/dg05.svg)](https://betteruptime.com/?utm_source=status_badge)
+> [!CAUTION]
+> 本仓库已归档。文档源码已迁移至主框架仓库 [flamego/flamego](https://github.com/flamego/flamego) 的 [`docs/`](https://github.com/flamego/flamego/tree/main/docs) 目录。请在该仓库提交问题与拉取请求。
 
 运行以下命令启动本地预览实例：
 
